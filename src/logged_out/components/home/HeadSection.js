@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 import {
   Grid,
@@ -11,9 +12,18 @@ import {
   withStyles,
   withWidth,
   isWidthUp,
+  CardActions,
 } from "@material-ui/core";
 import WaveBorder from "../../../shared/components/WaveBorder";
 import ZoomImage from "../../../shared/components/ZoomImage";
+import BuildSharpIcon from "@material-ui/icons/BuildSharp";
+
+import IntroContent from "../../../shared/content/IntroContent.json";
+import MiddleBlockContent from "../../../shared/content/MiddleBlockContent.json";
+import AboutContent from "../../../shared/content/AboutContent.json";
+import MissionContent from "../../../shared/content/MissionContent.json";
+import ProductContent from "../../../shared/content/ProductContent.json";
+import ContactContent from "../../../shared/content/ContactContent.json";
 
 const styles = (theme) => ({
   extraLargeButtonLabel: {
@@ -96,6 +106,11 @@ const styles = (theme) => ({
   waveBorder: {
     paddingTop: theme.spacing(4),
   },
+  brandText: {
+    fontFamily: "'Baloo Bhaijaan', cursive",
+    fontWeight: 400,
+    textDecoration: "none !important",
+  },
 });
 
 function HeadSection(props) {
@@ -103,74 +118,70 @@ function HeadSection(props) {
   return (
     <Fragment>
       <div className={classNames("lg-p-top", classes.wrapper)}>
-        <div className={classNames("container-fluid", classes.container)}>
-          <Box display="flex" justifyContent="center" className="row">
-            <Card
-              className={classes.card}
-              data-aos-delay="200"
-              data-aos="zoom-in"
-            >
-              <div className={classNames(classes.containerFix, "container")}>
-                <Box justifyContent="space-between" className="row">
-                  <Grid item xs={12} md={5}>
-                    <Box
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="space-between"
-                      height="100%"
-                    >
-                      <Box mb={4}>
-                        <Typography
-                          variant={isWidthUp("lg", width) ? "h3" : "h4"}
-                        >
-                          Free Template for building an SaaS app using
-                          Material-UI
-                        </Typography>
-                      </Box>
-                      <div>
-                        <Box mb={2}>
-                          <Typography
-                            variant={isWidthUp("lg", width) ? "h6" : "body1"}
-                            color="textSecondary"
-                          >
-                            Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed diam nonumy eirmod tempor invidunt
-                          </Typography>
-                        </Box>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          fullWidth
-                          className={classes.extraLargeButton}
-                          classes={{ label: classes.extraLargeButtonLabel }}
-                          href="https://github.com/dunky11/react-saas-template"
-                        >
-                          Download from GitHub
-                        </Button>
-                      </div>
+        <div>
+          <Card
+            className={classes.card}
+            data-aos-delay="200"
+            data-aos="zoom-in"
+          >
+            <div className={classNames(classes.containerFix, "container")}>
+              <Box justifyContent="space-between" className="row">
+                <Grid item xs={12} md={5}>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="space-between"
+                    height="100%"
+                  >
+                    <Box mb={4}>
+                      <Typography
+                        variant={isWidthUp("lg", width) ? "h2" : "h4"}
+                        className={classes.brandText}
+                      >
+                        {IntroContent.title}
+                      </Typography>
+                      <Typography
+                        variant={isWidthUp("lg", width) ? "h6" : "body1"}
+                        color="textSecondary"
+                      >
+                        {IntroContent.text}
+                      </Typography>
+                      <br></br>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.extraLargeButton}
+                        classes={{ label: classes.extraLargeButtonLabel }}
+                        startIcon={<BuildSharpIcon />}
+                        component={Link}
+                        to="/blog"
+                      >
+                        Repair Device
+                      </Button>
                     </Box>
+                    <div></div>
+                  </Box>
+                </Grid>
+                <Hidden smDown>
+                  <Grid item md={6}>
+                    <ZoomImage
+                      src={`${process.env.PUBLIC_URL}/images/logged_out/laptop.jpg`}
+                      className={classes.image}
+                      alt="header example"
+                    />
                   </Grid>
-                  <Hidden smDown>
-                    <Grid item md={6}>
-                      <ZoomImage
-                        src={`${process.env.PUBLIC_URL}/images/logged_out/headerImage.jpg`}
-                        className={classes.image}
-                        alt="header example"
-                      />
-                    </Grid>
-                  </Hidden>
-                </Box>
-              </div>
-            </Card>
-          </Box>
+                </Hidden>
+              </Box>
+            </div>
+          </Card>
         </div>
       </div>
-      <WaveBorder
+      {/* <WaveBorder
         upperColor={theme.palette.secondary.main}
-        lowerColor="#FFFFFF"
+        lowerColor="#eeeeee"
         className={classes.waveBorder}
         animationNegativeDelay={2}
-      />
+      /> */}
     </Fragment>
   );
 }
